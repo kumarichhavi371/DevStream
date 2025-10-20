@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import CodeMirror from '@uiw/react-codemirror'
 
 // theme
-import { githubDark, githubLight } from '@uiw/codemirror-theme-github'
+import { githubLight } from '@uiw/codemirror-theme-github'
 import { bespin } from '@uiw/codemirror-theme-bespin'
 import { duotoneDark, duotoneLight } from '@uiw/codemirror-theme-duotone'
-import { dracula } from '@uiw/codemirror-theme-dracula' // ⬅️ Good dark/vibrant base
+import { dracula } from '@uiw/codemirror-theme-dracula'
 import { xcodeDark, xcodeLight } from '@uiw/codemirror-theme-xcode'
 import { vscodeDark } from '@uiw/codemirror-theme-vscode'
 import { okaidia } from '@uiw/codemirror-theme-okaidia'
@@ -27,9 +26,6 @@ const CodeEditor = ({
     currentCode,
     setCurrentCode
 }) => {
-
-    // ⬅️ CHANGE 1: Set the default theme to dracula (a good dark/vibrant base)
-    // and initialize with a suitable dark theme.
     const [theme, setTheme] = useState(dracula); 
     const [language, setLanguage] = useState(javascript);
 
@@ -40,10 +36,8 @@ const CodeEditor = ({
         if (currentLanguage === 'python') setLanguage(python);
     }, [currentLanguage])
 
-
     useEffect(() => {
-        // ⬅️ CHANGE 2: Replace 'githubDark' with your new theme name: 'devStreamDark'
-        if (currentTheme === 'devStreamDark') setTheme(dracula); // Use dracula as the visual replacement
+        if (currentTheme === 'devStreamDark') setTheme(dracula);
         if (currentTheme === 'githubLight') setTheme(githubLight);
         if (currentTheme === 'bespin') setTheme(bespin);
         if (currentTheme === 'duotoneDark') setTheme(duotoneDark);
@@ -53,7 +47,6 @@ const CodeEditor = ({
         if (currentTheme === 'xcodeLight') setTheme(xcodeLight);
         if (currentTheme === 'vscodeDark') setTheme(vscodeDark);
         if (currentTheme === 'okaidia') setTheme(okaidia);
-        // Fallback for any old theme name that might not be in the list
         if (!currentTheme) setTheme(dracula); 
     }, [currentTheme])
 
@@ -61,7 +54,7 @@ const CodeEditor = ({
         <CodeMirror
             value={currentCode}
             height="100%"
-            theme={theme} // Uses the theme set above
+            theme={theme}
             extensions={[
                 language,
                 indentUnit.of("        "),
@@ -100,4 +93,5 @@ const CodeEditor = ({
 }
 
 export default CodeEditor
+
 
